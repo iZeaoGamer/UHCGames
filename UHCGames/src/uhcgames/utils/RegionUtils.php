@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace uhcgames\utils;
 
-use pocketmine\world\World;
+use pocketmine\level\Level as World;
 
 final class RegionUtils{
 	public static function onChunkGenerated(World $world, int $chunkX, int $chunkZ, callable $callback){
