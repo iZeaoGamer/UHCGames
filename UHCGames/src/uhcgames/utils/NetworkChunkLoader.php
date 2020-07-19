@@ -4,13 +4,12 @@ declare(strict_types=1);
 namespace uhcgames\utils;
 
 use pocketmine\math\Vector3;
-use pocketmine\world\ChunkListener;
-use pocketmine\world\ChunkLoader;
-use pocketmine\world\format\Chunk;
-use pocketmine\world\Position;
-use pocketmine\world\World;
+use pocketmine\level\ChunkLoader;
+use pocketmine\level\format\Chunk;
+use pocketmine\level\Position;
+use pocketmine\level\Level as World;
 
-class NetworkChunkLoader implements ChunkListener, ChunkLoader{
+class NetworkChunkLoader implements ChunkLoader{
 	/** @var World */
 	private $world;
 	/** @var int */
