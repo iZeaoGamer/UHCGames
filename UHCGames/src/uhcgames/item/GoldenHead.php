@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace uhcgames\item;
 
-use pocketmine\entity\effect\Effect;
-use pocketmine\entity\effect\EffectInstance;
+use pocketmine\entity\Effect;
+use pocketmine\entity\EffectInstance;
 use pocketmine\item\GoldenApple;
 use pocketmine\utils\TextFormat as TF;
 
