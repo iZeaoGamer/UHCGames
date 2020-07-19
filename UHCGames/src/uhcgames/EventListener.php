@@ -15,15 +15,14 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\server\DataPacketSendEvent;
-use pocketmine\event\world\ChunkLoadEvent;
-use pocketmine\GameMode;
+use pocketmine\event\level\ChunkLoadEvent;
 use pocketmine\item\Item;
 use pocketmine\network\mcpe\protocol\AdventureSettingsPacket;
 use pocketmine\network\mcpe\protocol\StartGamePacket;
 use pocketmine\Player;
 use pocketmine\tile\Chest;
 use pocketmine\utils\TextFormat;
-use pocketmine\world\World;
+use pocketmine\level\Level;
 use uhcgames\tasks\UHCGamesTask;
 
 class EventListener implements Listener{
@@ -80,8 +79,8 @@ class EventListener implements Listener{
 
 	public function handleDeath(PlayerDeathEvent $ev){
 		$player = $ev->getPlayer();
-		$player->getWorld()->dropItem($player, Item::get(Item::GOLDEN_APPLE, 1));
-		$player->setGamemode(GameMode::SPECTATOR());
+		$player->getLevel()->dropItem($player, Item::get(Item::GOLDEN_APPLE, 1));
+		$player->setGamemode(Player::SPECTATOR());
 		if(isset($this->plugin->gamePlayers[$player->getName()])){
 			unset($this->plugin->gamePlayers[$player->getName()]);
 		}
@@ -108,14 +107,14 @@ class EventListener implements Listener{
 		if(!$placeable){
 			$ev->setCancelled();
 		}else{
-			$this->placedBlocks[World::blockHash($block->getX(), $block->getY(), $block->getZ())] = $player->getName();
+			$this->placedBlocks[Level::blockHash($block->getX(), $block->getY(), $block->getZ())] = $player->getName();
 		}
 	}
 
 	public function handleBreak(BlockBreakEvent $ev){
 		$block = $ev->getBlock();
 
-		$blockHash = World::blockHash($block->getX(), $block->getY(), $block->getZ());
+		$blockHash = Level::blockHash($block->getX(), $block->getY(), $block->getZ());
 		if(!isset($this->placedBlocks[$blockHash])){
 			$breakable = false;
 			foreach($this->plugin->getConfig()->get("breakable-blocks") as $b){
