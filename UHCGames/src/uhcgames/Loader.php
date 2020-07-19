@@ -12,7 +12,7 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\tile\Chest;
 use pocketmine\utils\TextFormat as TF;
-use pocketmine\world\World;
+use pocketmine\level\Level as World;
 use uhcgames\item\GoldenHead;
 use uhcgames\tasks\UHCGamesTask;
 
@@ -28,7 +28,7 @@ class Loader extends PluginBase{
 	public const PREFIX = TF::RED . TF::BOLD . "Adrenaline> " . TF::RESET . TF::GOLD;
 
 	public function onEnable(){
-		$this->map = $this->getServer()->getWorldManager()->getDefaultWorld();
+		$this->map = $this->getServer()->getDefaultLevel();
 		if(!$this->getConfig()->get($this->map->getFolderName())){
 			$this->getLogger()->emergency("Map not found in configuration, shutting down!");
 			$this->getServer()->shutdown();
