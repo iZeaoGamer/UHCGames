@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace uhcgames\tasks;
 
 use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\GameMode;
 use pocketmine\item\Item;
 use pocketmine\math\Vector3;
 use pocketmine\Player;
@@ -178,7 +177,7 @@ class UHCGamesTask extends Task{
 		}elseif($this->shutdownTimer === 4){
 			if(count($this->plugin->gamePlayers) === 1){
 				foreach($this->plugin->gamePlayers as $player){
-					$player->setGamemode(GameMode::CREATIVE());
+					$player->setGamemode(Player::CREATIVE());
 					$this->server->broadcastMessage(Loader::PREFIX . $player->getName() . " won the game!");
 				}
 			}else{
